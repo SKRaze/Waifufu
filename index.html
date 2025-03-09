@@ -12,6 +12,7 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
+      user-select: none; /* Disable text selection globally */
     }
 
     /* Gradient Background */
@@ -39,6 +40,39 @@
       color: white;
       text-align: center;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+
+    /* Contact Text */
+    .contact {
+      font-family: Arial, sans-serif;
+      font-size: 1.6rem; /* Twice the size of the footer */
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      margin-bottom: 40px;
+    }
+
+    /* Email Text */
+    #email {
+      cursor: pointer; /* Indicate it's clickable */
+      text-decoration: none; /* No underline by default */
+    }
+
+    /* Email Hover Effect */
+    #email:hover {
+      text-decoration: underline; /* Underline on hover */
+    }
+
+    /* Email Click Effect */
+    #email.copied {
+      color: limegreen; /* Turn green when clicked */
+    }
+
+    /* Copied Message */
+    #copied-message {
+      display: none;
+      font-size: 1rem;
+      margin-left: 10px;
     }
 
     /* Footer Text */
@@ -56,11 +90,45 @@
       h1 {
         font-size: 2.5rem;
       }
+      .contact {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
   <h1>Waifufu Studio</h1>
-  <footer>Coming in hot from Sexy & OtakuApologist 2025</footer>
+  <div class="contact">
+    Reach us: 
+    <span id="email"></span>
+    <span id="copied-message">Copied</span>
+  </div>
+  <footer>Coming in hot from Sexy & OtakuApologist 2025 - Soon&trade;</footer>
+
+  <script>
+    // Obfuscate the email
+    const firstHalf = "VGVhbUA=";
+    const secondHalf = "&#87;&#97;&#105;&#102;&#117;&#102;&#117;&#46;&#99;&#111;&#109;";
+    const emailElement = document.getElementById("email");
+    const copiedMessage = document.getElementById("copied-message");
+
+    // Set the email text
+    emailElement.innerHTML = atob(firstHalf) + secondHalf;
+
+    // Copy email to clipboard on click
+    emailElement.addEventListener("click", () => {
+      const email = atob(firstHalf) + "Waifufu.com"; // Dynamically construct the full email
+      navigator.clipboard.writeText(email).then(() => {
+        emailElement.classList.add("copied"); // Turn email green
+        copiedMessage.style.display = "inline"; // Show "Copied!" message
+        setTimeout(() => {
+          emailElement.classList.remove("copied"); // Revert email color
+          copiedMessage.style.display = "none"; // Hide "Copied" message after 5 seconds
+        }, 5000);
+      }).catch((err) => {
+        console.error("Failed to copy email: ", err);
+      });
+    });
+  </script>
 </body>
 </html>
