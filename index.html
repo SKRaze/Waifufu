@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Waifufu Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Kaushan+Script&display=swap" rel="stylesheet">
+  
   <style>
     /* General Reset */
     body, html {
@@ -33,10 +34,21 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* Tagline Text */
+	.tagline {
+	  font-family: 'Caveat Brush', cursive;
+	  font-size: 28px; /* Set font size to 32px */
+	  font-weight: normal; /* Explicitly set to normal (though Caveat Brush doesn't support weights) */
+	  color: white;
+	  text-align: center;
+	  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	  margin-bottom: 20px;
+	}
+
     /* Centered Text */
     h1 {
       font-family: 'Kaushan Script', cursive;
-      font-size: 4rem;
+      font-size: 5rem;
       color: white;
       text-align: center;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -52,19 +64,19 @@
       margin-bottom: 40px;
     }
 
-    /* Email Text */
-    #email {
+    /* poshta Text */
+    #poshta {
       cursor: pointer; /* Indicate it's clickable */
       text-decoration: none; /* No underline by default */
     }
 
-    /* Email Hover Effect */
-    #email:hover {
+    /* poshta Hover Effect */
+    #poshta:hover {
       text-decoration: underline; /* Underline on hover */
     }
 
-    /* Email Click Effect */
-    #email.copied {
+    /* poshta Click Effect */
+    #poshta.copied {
       color: limegreen; /* Turn green when clicked */
     }
 
@@ -93,42 +105,81 @@
       .contact {
         font-size: 1.2rem;
       }
+      .tagline {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="tagline" id="tagline"></div>
   <h1>Waifufu Studio</h1>
   <div class="contact">
     Reach us: 
-    <span id="email"></span>
+    <span id="poshta"></span>
     <span id="copied-message">Copied</span>
   </div>
   <footer>Coming in hot from Sexy & OtakuApologist 2025 - Soon&trade;</footer>
 
   <script>
-    // Obfuscate the email
-    const firstHalf = "VGVhbUA=";
-    const secondHalf = "&#87;&#97;&#105;&#102;&#117;&#102;&#117;&#46;&#99;&#111;&#109;";
-    const emailElement = document.getElementById("email");
+    const edno = "VGVhbUA=";
+    const dve = "&#87;&#97;&#105;&#102;&#117;&#102;&#117;&#46;&#99;&#111;&#109;";
+    const poshtaElement = document.getElementById("poshta");
     const copiedMessage = document.getElementById("copied-message");
 
-    // Set the email text
-    emailElement.innerHTML = atob(firstHalf) + secondHalf;
+    // Set text
+    poshtaElement.innerHTML = atob(edno) + dve;
 
-    // Copy email to clipboard on click
-    emailElement.addEventListener("click", () => {
-      const email = atob(firstHalf) + "Waifufu.com"; // Dynamically construct the full email
-      navigator.clipboard.writeText(email).then(() => {
-        emailElement.classList.add("copied"); // Turn email green
-        copiedMessage.style.display = "inline"; // Show "Copied!" message
+    // Copy to clipboard on click
+    poshtaElement.addEventListener("click", () => {
+      const poshta = atob(edno) + "Waifufu.com"; 
+      navigator.clipboard.writeText(poshta).then(() => {
+        poshtaElement.classList.add("copied"); // Turn  green
+        copiedMessage.style.display = "inline"; // Show "Copied" message
         setTimeout(() => {
-          emailElement.classList.remove("copied"); // Revert email color
+          poshtaElement.classList.remove("copied"); // Revert  color
           copiedMessage.style.display = "none"; // Hide "Copied" message after 5 seconds
         }, 5000);
       }).catch((err) => {
-        console.error("Failed to copy email: ", err);
+        console.error("Failed to copy poshta: ", err);
       });
     });
+
+    // Taglines
+    const taglines = [
+
+	"Rm9yIFdoZW4gWW91ciBDcnVzaCBpcyBUb28gM0QuLi4=",
+	"U2VydmluZyBQaXhlbCBQZXJmZWN0aW9uLi4u",
+	"WW91ciBNb20gU2FpZCBHZXQgYSBXaWZlLCBXZSBTYXkgR2V0IGEgV2FpZnUuLi4=",
+	"TGVzcyBEcmFtYSBUaGFuIDNELCBNb3JlIFNwYXJrbGUgdGhhbiBXaS1GaS4uLg==",
+	"RGFuZ2VyIFpvbmUgLSBXYWlmdSBFbmFibGVycyBSb2FtIEZyZWUgSGVyZS4uLg==",
+	"QmVjYXVzZSBSZWFsaXR5IGlzIE92ZXJyYXRlZCAuLi4=",
+	"V2hlcmUgWW91ciBEYXlkcmVhbXMgR2V0IGEgR2xvdy1VcC4uLg==",
+	"Tm8gSnVkZ21lbnQsIEp1c3QgQXJ0Li4u",
+	"V2UgUHV0IHRoZSAnRnVuJyBpbiAnRnVuY3Rpb25hbGx5IE9ic2Vzc2VkJy4uLg==",
+	"TGVzcyBSZW50LCBNb3JlIFJhbWVuLCBBbGwgdGhlIFJvbWFuY2UuLi4=",
+	"WW91ciBUaGVyYXBpc3QgQXBwcm92ZXMgKFByb2JhYmx5IE5vdCkuLi4=",
+	"V2FpZnVzIFNvIEZpcmUgWW91ciBHVFAgSnVzdCBZZWV0ZWQgSXRzZWxmLi4u",
+	"Q2F0Y2ggVGhlc2UgSGFuZHMuLi4gb3IgSnVzdCBhIDJEIEJhZS4uLg==",
+	"V2hlbiBEaXNjb3JkIEtpdHRlbidzIEdvdCBDb21wZXRpdGlvbi4uLg==",
+	"QmlnIFdhaWZ1IEVuZXJneSwgWmVybyBCdWxsc2hpdC4uLg==",
+	"Tm8gQ2FwLCBKdXN0IEthd2FpaSBTdGFja3MuLi4=",
+	"Q2xvdXQncyBGYWtlLCBXYWlmdXMgQXJlIEZvcmV2ZXIuLi4=",
+	"WW91ciBGQkkgQWdlbnQgQmx1c2hlcyBXaGVuIFlvdSBBcmUgSGVyZS4uLg==",
+	"VG91Y2ggR3Jhc3M/IFdlIGNhbiBtYWtlIGl0IG91dCBvZiBwaXhlbHMuLi4=",
+	"U2hlJ3MgMkQsIFlvdSdyZSBORCwgV2UncmUgQWxsIFNjcmV3ZWQuLi4=",
+	"WW91ciBXYWlmdSBJc24ndCBSZWFsPyBIb2xkIE15IENhbnZhcy4uLg==",
+	"V2UgU2ltcCBTbyBZb3UgRG9uJ3QgSGF2ZSBUby4uLg==",
+	"V2FpZnVzIGFyZSBFdGVybmFsLi4uIFVudGlsIHRoZSBTZXJ2ZXIgQ3Jhc2hlcy4uLg==",
+	"V2FpZnVzIFN0YXkgQWZ0ZXIgU2VlaW5nIFlvdXIgU2VhcmNoIEhpc3RvcnkuLi4="
+
+
+    ];
+
+    // Pull Tagline
+    const taglineElement = document.getElementById("tagline");
+    const randomTagline = taglines[Math.floor(Math.random() * taglines.length)];
+    taglineElement.textContent = atob(randomTagline);
   </script>
 </body>
 </html>
